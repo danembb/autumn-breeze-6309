@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :flights, only: [:index]
+  resources :airlines, only: [:show]
 
-  resources :trips, only: [:destroy]
+  resources :flights, only: [:index]
+    resources :trips, only: [:destroy]
 end
