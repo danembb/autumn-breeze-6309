@@ -2,5 +2,6 @@
 
 <h3>My Passengers:</h3>
 <% @airline.all_distinct_adult_passengers.each do |passenger| %>
-  <p><%= passenger.name %></p>
+  <h4><%= passenger.name %></h4>
+  <p><%= passenger.age %></p>
 <% end %>

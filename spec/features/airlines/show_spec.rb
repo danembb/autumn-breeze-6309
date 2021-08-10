@@ -40,7 +40,7 @@ RSpec.describe 'airlines show page' do
     it 'can see a unique list of passengers on this airline who are adults' do
       expect(page).to have_content(@passenger2.name)
       expect(page).to have_content(@passenger2.age)
-
+      save_and_open_page
       expect(page).to have_content(@passenger3.name)
       expect(page).to have_content(@passenger3.age)
 
@@ -49,8 +49,8 @@ RSpec.describe 'airlines show page' do
       expect(page).to_not have_content(@passenger1.age)
 
       #duplicate
-      expect(page).to_not have_content(@passenger6.name)
-      expect(page).to_not have_content(@passenger6.age)
+      expect(page).to have_content(@passenger6.name, count: 1)
+      expect(page).to have_content(@passenger6.age, count: 1)
     end
   end
 end
