@@ -6,6 +6,7 @@
   <% flight.passengers.each do |passenger| %>
     <div id="passenger-<%= passenger.id %>">
       <p>Passenger Name: <%= passenger.name %></p>
+      <%= link_to 'Remove Passenger' %>
     </div>
   <% end %>
 </div>

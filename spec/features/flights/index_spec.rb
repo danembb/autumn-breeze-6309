@@ -32,9 +32,8 @@ RSpec.describe 'flights index page' do
   # When I visit the flights index page x
   # I see a list of all flight numbers x
   # And next to each flight number I see the name of the Airline of that flight x
-  # And under each flight number I see the names of all that flight's passengers t
+  # And under each flight number I see the names of all that flight's passengers x
     it 'can see flights with attributes and passengers' do
-      save_and_open_page
       within "#flight-#{@flight1.id}" do
         expect(page).to have_content(@airline1.name)
 
@@ -59,6 +58,33 @@ RSpec.describe 'flights index page' do
 
         expect(page).to have_content(@passenger4.name)
         expect(page).to have_content(@passenger5.name)
+      end
+    end
+
+    it 'can remove a passenger from a flight' do
+
+      # User Story 2, Remove a Passenger from a Flight
+      # As a visitor x
+      # When I visit the flights index page x
+      # Next to each passengers name x
+      # I see a link or button to remove that passenger from that flight t
+      # When I click on that link/button t
+      # I'm returned to the flights index page t
+      # And I no longer see that passenger listed under that flight t
+      # (Note: you should not destroy the passenger record entirely)
+      within "#passenger-#{@passenger5.id}" do
+        expect(page).to have_link("Remove Passenger")
+
+        click_link("Remove Passenger")
+
+        expect(current_path).to eq(flights_path)
+
+      within "#flight-#{@flight3.id}" do
+        expect(page).to_not have_content(@passenger5.name)
+      end
+
+      expect(@flight3.passengers.length).to eq(1)
+      expect(Passenger.all.length).to eq(5)
       end
     end
   end
