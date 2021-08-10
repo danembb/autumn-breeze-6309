@@ -2,11 +2,11 @@ class Airline < ApplicationRecord
   has_many :flights
 
   def all_distinct_adult_passengers
-    wip = flights.joins(trips: :passenger)
-           .select('passengers.*, count(trips.id) as trip_number')
+    flights.joins(trips: :passenger)
+           .select('passengers.*, count(trips.id) AS trip_total')
            .where('passengers.age >= ?', 18)
-           .group('passenger.id')
-           .order('trip_number desc')
+           .group('passengers.id')
+           .order('trip_total desc')
            .distinct
   end
 end

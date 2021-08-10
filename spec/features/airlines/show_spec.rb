@@ -36,11 +36,11 @@ RSpec.describe 'airlines show page' do
 
   # User Story 3, Airline's Passengers
   # As a visitor x
-  # When I visit an airline's show page t
-  # Then I see a list of passengers that have flights on that airline t
-  # And I see that this list is unique (no duplicate passengers) t
-  # And I see that this list only includes adult passengers t
-  # (Note: an adult is anyone with age greater than or equal to 18) t
+  # When I visit an airline's show page x
+  # Then I see a list of passengers that have flights on that airline x
+  # And I see that this list is unique (no duplicate passengers) x
+  # And I see that this list only includes adult passengers x
+  # (Note: an adult is anyone with age greater than or equal to 18) x
     it 'can see a unique list of passengers on this airline who are adults' do
       expect(page).to have_content(@passenger2.name)
       expect(page).to have_content(@passenger2.age)
@@ -58,14 +58,13 @@ RSpec.describe 'airlines show page' do
     end
 
 #   Extension, Frequent Flyers
-#   As a visitor
-#   When I visit an airline's show page,
-#   Then I see that the list of adult passengers is sorted
-#   by the number of flights each passenger has taken on the airline from most to least
-#   (Note: you should only make 1 database query to retrieve the sorted list of passengers)
+#   As a visitor x
+#   When I visit an airline's show page, x
+#   Then I see that the list of adult passengers is sorted x
+#   by the number of flights each passenger has taken on the airline from most to least x
+#   (Note: you should only make 1 database query to retrieve the sorted list of passengers) x
     it 'can see a list of passengers sorted by number of flights from most to least' do
-
-      #Rory: 3 trips, Nico: 2 trips, Ellie: 1 trip 
+      #Rory: 3 trips, Nico: 2 trips, Ellie: 1 trip
       expect(@passenger6.name).to appear_before(@passenger2.name)
       expect(@passenger2.name).to appear_before(@passenger3.name)
     end
