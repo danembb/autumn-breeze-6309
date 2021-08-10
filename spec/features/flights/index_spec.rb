@@ -41,6 +41,7 @@ RSpec.describe 'flights index page' do
 
         expect(page).to have_content(@passenger1.name)
         expect(page).to have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
       end
 
       within "#flight-#{@flight2.id}" do
@@ -49,6 +50,7 @@ RSpec.describe 'flights index page' do
         expect(page).to have_content(@flight2.number)
 
         expect(page).to have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
       end
 
       within "#flight-#{@flight3.id}" do
@@ -56,6 +58,7 @@ RSpec.describe 'flights index page' do
 
         expect(page).to have_content(@flight3.number)
 
+        expect(page).to_not have_content(@passenger1.name)
         expect(page).to have_content(@passenger4.name)
         expect(page).to have_content(@passenger5.name)
       end
@@ -72,6 +75,22 @@ RSpec.describe 'flights index page' do
       # I'm returned to the flights index page x
       # And I no longer see that passenger listed under that flight x
       # (Note: you should not destroy the passenger record entirely) x
+      within "#passenger-#{@passenger1.id}" do
+        expect(page).to have_link("Remove Passenger")
+      end
+
+      within "#passenger-#{@passenger2.id}" do
+        expect(page).to have_link("Remove Passenger")
+      end
+
+      within "#passenger-#{@passenger3.id}" do
+        expect(page).to have_link("Remove Passenger")
+      end
+
+      within "#passenger-#{@passenger4.id}" do
+        expect(page).to have_link("Remove Passenger")
+      end
+
       within "#passenger-#{@passenger5.id}" do
         expect(page).to have_link("Remove Passenger")
 
