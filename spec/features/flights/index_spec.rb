@@ -10,10 +10,10 @@ RSpec.describe 'flights index page' do
     @flight2 = @airline1.flights.create!(number: 32, date: "08/02/02", departure_city: "Northampton, MA", arrival_city: "Lakewood, CO")
     @flight3 = @airline2.flights.create!(number: 33, date: "10/31/06", departure_city: "Holyoke, MA", arrival_city: "Minneapolis, MN")
 
-    @passenger1 = Passenger.create!(name: "Bb", age: 25)
-    @passenger2 = Passenger.create!(name: "Nico", age: 26)
+    @passenger1 = Passenger.create!(name: "Bb", age: 17)
+    @passenger2 = Passenger.create!(name: "Nico", age: 18)
     @passenger3 = Passenger.create!(name: "Ellie", age: 67)
-    @passenger4 = Passenger.create!(name: "Arkham", age: 18)
+    @passenger4 = Passenger.create!(name: "Arkham", age: 9)
     @passenger5 = Passenger.create!(name: "Andromeda", age: 44)
 
     @trip1 = Trip.create!(flight_id: @flight1.id, passenger_id: @passenger1.id)
@@ -58,9 +58,9 @@ RSpec.describe 'flights index page' do
 
         expect(page).to have_content(@flight3.number)
 
-        expect(page).to_not have_content(@passenger1.name)
         expect(page).to have_content(@passenger4.name)
         expect(page).to have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger1.name)
       end
     end
 
