@@ -10,11 +10,11 @@ RSpec.describe 'flights index page' do
     @flight2 = @airline1.flights.create!(number: 32, date: "08/02/02", departure_city: "Northampton, MA", arrival_city: "Lakewood, CO")
     @flight3 = @airline2.flights.create!(number: 33, date: "10/31/06", departure_city: "Holyoke, MA", arrival_city: "Minneapolis, MN")
 
-    @passenger1 = Passenger.create!(name: "Bb")
-    @passenger2 = Passenger.create!(name: "Nico")
-    @passenger3 = Passenger.create!(name: "Ellie")
-    @passenger4 = Passenger.create!(name: "Arkham")
-    @passenger5 = Passenger.create!(name: "Andromeda")
+    @passenger1 = Passenger.create!(name: "Bb", age: 25)
+    @passenger2 = Passenger.create!(name: "Nico", age: 26)
+    @passenger3 = Passenger.create!(name: "Ellie", age: 67)
+    @passenger4 = Passenger.create!(name: "Arkham", age: 18)
+    @passenger5 = Passenger.create!(name: "Andromeda", age: 44)
 
     @trip1 = Trip.create!(flight_id: @flight1.id, passenger_id: @passenger1.id)
     @trip2 = Trip.create!(flight_id: @flight1.id, passenger_id: @passenger2.id)
@@ -67,17 +67,18 @@ RSpec.describe 'flights index page' do
       # As a visitor x
       # When I visit the flights index page x
       # Next to each passengers name x
-      # I see a link or button to remove that passenger from that flight t
-      # When I click on that link/button t
-      # I'm returned to the flights index page t
-      # And I no longer see that passenger listed under that flight t
-      # (Note: you should not destroy the passenger record entirely)
+      # I see a link or button to remove that passenger from that flight x
+      # When I click on that link/button x
+      # I'm returned to the flights index page x
+      # And I no longer see that passenger listed under that flight x
+      # (Note: you should not destroy the passenger record entirely) x
       within "#passenger-#{@passenger5.id}" do
         expect(page).to have_link("Remove Passenger")
 
         click_link("Remove Passenger")
 
         expect(current_path).to eq(flights_path)
+      end
 
       within "#flight-#{@flight3.id}" do
         expect(page).to_not have_content(@passenger5.name)
@@ -85,7 +86,6 @@ RSpec.describe 'flights index page' do
 
       expect(@flight3.passengers.length).to eq(1)
       expect(Passenger.all.length).to eq(5)
-      end
     end
   end
 end
